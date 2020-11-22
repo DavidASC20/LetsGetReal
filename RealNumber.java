@@ -14,10 +14,6 @@ public class RealNumber{
     }
     //---------ONLY EDIT BELOW THIS LINE------------
   
-    /*
-    *Return true when the values are within 0.001% of eachother.
-    *Special case: if one is exactly zero, the other must be exactly zero.
-    */
     public boolean equals(RealNumber other){
       if(value == 0){
         if(other.value == 0){
@@ -31,17 +27,10 @@ public class RealNumber{
       }
     }
   
-    /*
-    *Return a new RealNumber that has the value of:
-    *the sum of this and the other
-    */
     public RealNumber add(RealNumber other){
       RealNumber temp = new RealNumber(0.0);
-      temp.value += this.value;
-      temp.value += other.value;
-       //other can be ANY RealNumber, including a RationalNumber
-       //or other subclasses of RealNumber (that aren't written yet)
-       return null;
+      temp.value = value + other.value;
+       return temp;
     }
   
     /*
@@ -49,7 +38,9 @@ public class RealNumber{
     *the product of this and the other
     */
     public RealNumber multiply(RealNumber other){
-          return null;
+          RealNumber temp = new RealNumber(0.0);
+          temp.value = value * other.value;
+          return temp;
     }
   
     /*
@@ -57,7 +48,12 @@ public class RealNumber{
     *this divided by the other
     */
     public RealNumber divide(RealNumber other){
-          return null;
+      if(other.value == 0){
+        throw new ArithmeticException(other.value + " cannot be equal to zero");
+      }
+          RealNumber temp = new RealNumber(0.0);
+          temp.value = value / other.value;
+          return temp;
     }
   
     /*
@@ -65,6 +61,8 @@ public class RealNumber{
     *this minus the other
     */
     public RealNumber subtract(RealNumber other){
-      return null;
+      RealNumber temp = new RealNumber(0.0);
+      temp.value = value - other.value;
+      return temp;
     }
   }
