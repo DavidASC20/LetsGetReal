@@ -19,7 +19,12 @@ public class RealNumber{
     *Special case: if one is exactly zero, the other must be exactly zero.
     */
     public boolean equals(RealNumber other){
-      if(Math.abs(this.value / other.value * 1000)< 1){
+      if(value == 0){
+        if(other.value == 0){
+          return true;
+        }return false;
+      }
+      else if(Math.abs((this.value - other.value) * 1000) < 1){
          return true;
       }else{
         return false;
@@ -31,6 +36,9 @@ public class RealNumber{
     *the sum of this and the other
     */
     public RealNumber add(RealNumber other){
+      RealNumber temp = new RealNumber(0.0);
+      temp.value += this.value;
+      temp.value += other.value;
        //other can be ANY RealNumber, including a RationalNumber
        //or other subclasses of RealNumber (that aren't written yet)
        return null;
