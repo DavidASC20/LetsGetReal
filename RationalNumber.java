@@ -25,7 +25,11 @@ public class RationalNumber extends RealNumber
   }
 
   public double getValue(){
+    if(denominator == 0){
+      return numerator;
+    }else{
     return numerator / denominator;
+    }
   }
 
   /**
