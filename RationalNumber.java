@@ -9,11 +9,18 @@ public class RationalNumber extends RealNumber
   */
   public RationalNumber(int nume, int deno){
     super(0.0);//this value is ignored! 
-    if(deno == 0){
+    if(deno == 0 || nume == 0){
       numerator = 0;
       denominator = 1;
-    numerator = nume;
+    }numerator = nume;
     denominator = deno;
+    reduce();
+    if(numerator < 0 && denominator < 0){
+      numerator = numerator * -1;
+      denominator = denominator * -1;
+    }if(numerator > 0 && denominator < 0){
+      numerator = numerator * -1;
+      denominator = denominator * -1;
     }
   }
 
@@ -25,13 +32,13 @@ public class RationalNumber extends RealNumber
   *@return the numerator
   */
   public int getNumerator(){
-    return numerator;
+    return this.numerator;
   }
   /**
   *@return the denominator
   */
   public int getDenominator(){
-    return denominator;
+    return this.denominator;
   }
   /**
   *@return a new RationalNumber that has the same numerator
@@ -65,21 +72,17 @@ public class RationalNumber extends RealNumber
   *@param b the second integer
   *@return the value of the GCD
   */
-  private static int gcd(int a, int b){
-    boolean remainder = false;
-    int temp1 = a;
-    int temp2 = b;
-    while(remainder == false){
-      int temp3 = temp1 % temp2;
-      if(temp3 != 0){
-        temp1 = temp2;
-        temp2 = temp3;
-      }else{
-        remainder = true;
+    private static int gcd(int a, int b){
+      int x = Math.abs(a);
+      int y = Math.abs(b);
+        int temp = Math.min(x, y);
+        int tempNum = 1;
+        for(int i = 1; i <= temp; i++){
+            if(x % i == 0 && y % i == 0){
+                tempNum = i;
+            }
+        }return tempNum;
       }
-    }
-    return temp2;
-  }
 
   /**
   *Divide the numerator and denominator by the GCD
@@ -87,14 +90,24 @@ public class RationalNumber extends RealNumber
   *reduced after construction.
   */
   private void reduce(){
-
+    if(denominator == 0){
+      denominator = 1;
+      numerator = 0;
+    }else{
+    int temp = gcd(numerator, denominator);
+    numerator = numerator / temp;
+    denominator = denominator / temp;
+    }
   }
   /******************Operations Return a new RationalNumber!!!!****************/
   /**
   *Return a new RationalNumber that is the product of this and the other
   */
   public RationalNumber multiply(RationalNumber other){
-    return null;
+    RationalNumber temp = new RationalNumber(0, 0);
+    temp.numerator = this.getNumerator() * other.getNumerator();
+    temp.denominator = this.getDenominator() * other.getDenominator();
+    return temp;
   }
 
   /**
