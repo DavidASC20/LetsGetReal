@@ -107,6 +107,7 @@ public class RationalNumber extends RealNumber
     RationalNumber temp = new RationalNumber(0, 0);
     temp.numerator = this.getNumerator() * other.getNumerator();
     temp.denominator = this.getDenominator() * other.getDenominator();
+    temp.reduce();
     return temp;
   }
 
@@ -114,19 +115,38 @@ public class RationalNumber extends RealNumber
   *Return a new RationalNumber that is the this divided by the other
   */
   public RationalNumber divide(RationalNumber other){
-    return null;
+    RationalNumber temp = new RationalNumber(0, 0);
+    if(other.getNumerator() == 0 || other.getDenominator() == 0){
+      temp.numerator = 0;
+      temp.denominator = 0;
+    }else{
+    temp.numerator = this.getNumerator() * other.getDenominator();
+    temp.denominator = this.getDenominator() * other.getNumerator();
+  }temp.reduce();
+    return temp;
   }
 
   /**
   *Return a new RationalNumber that is the sum of this and the other
   */
   public RationalNumber add(RationalNumber other){
-    return null;
+    RationalNumber temp = new RationalNumber(0, 0);
+    this.reduce();
+    other.reduce();
+    int a = this.denominator;
+    int b = other.denominator;
+    temp.numerator = (this.numerator * b) + (other.numerator * a);
+    temp.denominator = (this.denominator * b) + (this.numerator * a);
+    temp.reduce();
+    return temp;
   }
   /**
   *Return a new RationalNumber that this minus the other
   */
   public RationalNumber subtract(RationalNumber other){
-    return null;
+    RationalNumber temp = new RationalNumber(0, 0);
+    temp.numerator = this.getNumerator() - other.getNumerator();
+    temp.denominator = this.getDenominator() - other.getDenominator();
+    return temp;
   }
 } 
