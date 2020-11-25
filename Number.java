@@ -9,7 +9,8 @@ public abstract class Number{
     if(getValue() == other.getValue()){
         return 0;
     }else{
-        return getValue() - other.getValue();
+        double temp = (getValue() - other.getValue());
+        return (int)temp;
     }
   }
 
