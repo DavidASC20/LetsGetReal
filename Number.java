@@ -1,30 +1,21 @@
-public abstract class Number{
-  public abstract double getValue();
-
-  /*return 0 when this Number equals the other RealNumber
-  return a negative value when this Number is smaller than the other Number
-  return a positive value when this Number is larger than the other Number
-  */
-  public int compareTo(Number other){
-    if(getValue() == other.getValue()){
-        return 0;
-    }else{
-        double temp = (getValue() - other.getValue());
-        return (int)temp;
+public abstract class Number {
+    public abstract double getValue();
+  
+    public int compareTo(Number other) {
+      int comparing = 0;
+      if (this.getValue() == other.getValue()) comparing = 0;
+      if (this.getValue() < other.getValue()) comparing = -1;
+      if (this.getValue() > other.getValue()) comparing = 1;
+      return comparing;
     }
+  
+    public boolean equals(Number other) {
+      boolean answer = false;
+      if (this.getValue() == 0 && other.getValue() == 0) answer = true;
+      double value = Math.abs((this.getValue() - other.getValue()) / this.getValue());
+      if (value < 0.00001) answer = true;
+      return answer;
+    }
+  
   }
-
-  /*
-  *Return true when the % difference of the values
-  *are within 0.00001 of eachother.
-  *Special case: if one is exactly zero, the other must be exactly zero.
-  */
-  public boolean equals(Number other){
-      if(getValue() == 0){
-          return (other.getValue() == 0);
-      }
-     else if(Math.abs((getValue() / other.getValue()) * 1000) < 1){
-          return true;
-      }return false;
-    }
-}
+  
